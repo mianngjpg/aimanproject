@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aiman | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== GLOBAL ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #888;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ELEMEN BINTANG LEBIH BANYAK */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(1px 1px at 25px 50px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 75px 130px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.2px 1.2px at 150px 250px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 250px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 100px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.8px 1.8px at 200px 300px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 450px 400px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 100px 450px, #fff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 350px 350px; 
+  opacity: 0.8;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+  z-index: 0;
+}
+
+/* DEKORASI PANAH */
+.decor-arrows {
+  position: fixed;
+  left: 40px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+  opacity: 0.5;
+}
+.decor-arrows span { font-size: 20px; color: #666; transform: rotate(-90deg); display: block; }
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 40px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+nav ul { display: flex; list-style: none; gap: 40px; }
+nav a { color: #888; text-decoration: none; font-size: 18px; font-weight: 500; transition: 0.3s; }
+nav a:hover { color: #fff; }
+.logo-lfc img { width: 45px; filter: brightness(0.8); }
+
+/* ===== SECTION BASE ===== */
+section {
+  min-height: 100vh;
+  padding: 0 80px;
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== ANIMASI REVEAL (GENERAL) ===== */
+.reveal-slide {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1), transform 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.reveal-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.active .reveal-slide, .active .reveal-up {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* ===== HOME (ANIMASI BERULANG) ===== */
+#home {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hero-title {
+  font-size: clamp(40px, 15vw, 120px);
+  font-weight: 800;
+  color: #ccc;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.hero-sub {
+  font-size: 14px;
+  letter-spacing: 4px;
+  margin-top: 15px;
+  color: #666;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease 0.3s, transform 1.5s ease 0.3s;
+}
+.tech {
+  margin-top: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease 0.6s, transform 1.5s ease 0.6s;
+}
+.tech img { width: 250px; filter: grayscale(1) brightness(0.8); }
+
+/* State Aktif untuk Home */
+#home.active .hero-title { opacity: 1; transform: scale(1); }
+#home.active .hero-sub, #home.active .tech { opacity: 1; transform: translateY(0); }
+
+/* ===== ABOUT ===== */
+#about { align-items: center; padding: 0; }
+.profile-wrapper { width: 100%; height: 100vh; display: flex; justify-content: space-between; align-items: center; }
+.profile-text { width: 45%; padding-left: 80px; }
+.profile-text h2 { font-size: 48px; color: #fff; margin-bottom: 5px; }
+.profile-text .email { display: block; font-size: 22px; margin-bottom: 60px; color: #ccc; font-family: 'Inter', sans-serif; }
+.profile-text p { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; color: #aaa; text-align: justify; }
+.location-footer { margin-top: 100px; font-size: 12px; text-align: center; width: 100%; color: #666; letter-spacing: 2px; }
+.profile-image { width: 50%; height: 100%; display: flex; justify-content: flex-end; align-items: flex-end; }
+.profile-image img { height: 90vh; object-fit: cover; filter: grayscale(100%) contrast(1.1); }
+
+/* ===== EDUCATION ===== */
+#education { flex-direction: column; justify-content: center; }
+.edu-item { margin-bottom: 40px; cursor: pointer; position: relative; }
+.edu-item h3 { font-size: 32px; color: #333; transition: 0.4s; }
+.edu-item p { font-family: 'Inter', sans-serif; font-size: 14px; color: #555; }
+.edu-item:hover h3 { color: #fff; }
+.edu-preview {
+  position: fixed; right: 100px; top: 50%; transform: translateY(-50%) translateX(100px);
+  width: 400px; height: 400px; border-radius: 50%; overflow: hidden;
+  opacity: 0; visibility: hidden; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid #333;
+}
+.edu-preview img { width: 100%; height: 100%; object-fit: cover; }
+.edu-item:hover .edu-preview { opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0); }
+
+/* ===== CONTACT ===== */
+#contact { flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.contact-icons { display: flex; gap: 80px; margin-top: 60px; }
+.contact-icons a { color: #222; font-size: 70px; transition: 0.4s; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
+.contact-icons a:hover { color: #fff; transform: translateY(-15px); }
+.contact-icons span { font-size: 11px; color: #444; margin-top: 10px; }
+
+.copyright-label { position: fixed; right: 40px; bottom: 40px; display: flex; align-items: center; gap: 10px; font-size: 11px; color: #555; text-transform: uppercase; }
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="decor-arrows">
+  <span>&#62;</span><span>&#62;</span><span>&#62;</span><span>&#62;</span><span>&#62;</span>
+</div>
+
+<nav>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education Background</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="logo-lfc">
+    <img src="assets/liverpool.png">
+  </div>
+</nav>
+
+<section id="home">
+  <div class="hero-title">AIMAN</div>
+  <div class="hero-sub">Software Engineering</div>
+  <div class="tech">
+    <img src="assets/bahasa.png">
+  </div>
+</section>
+
+<section id="about">
+  <div class="profile-wrapper">
+    <div class="profile-text reveal-slide">
+      <h2>ABOUT ME</h2>
+      <span class="email">miannnnnne@gmail.com</span>
+      <p>
+       Aiman Muhammad Alkhatib (Aiman), Saya berasal dari kota Gresik Jawa Timur, 
+        saya anak kedua dari 2 bersaudara, saya dari kecil sangat suka dengan hal yang 
+        berbau dengan teknologi, saya sangat suka bermain sepak bola, futsal, basket 
+        dan olahraga lainnya. Selain itu saya sangat suka bermain game PES, Minecraft, 
+        Call Of Duty, dan Forza Horizon 5, tinggi saya 170 cm dan umur saya saat ini 17 tahun.
+        Saya fans Liverpool Football Club sejak kelas 2 SD. Emyu klub hama. My music favorit gweh
+        Beautiful In White - Shane Filan, Somebody's Pleasure - Aziz Hedra, Love Story - Taylor Swift
+      </p>
+      <div class="location-footer">ANFIELD RD<br>— LIVERPOOL L4 0TH —</div>
+    </div>
+    <div class="profile-image reveal-slide" style="transition-delay: 0.3s;">
+      <img src="assets/profile.png" alt="Aiman Profile">
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="reveal-up">
+    <h2 style="font-size: 40px; color: #fff; margin-bottom: 50px;">EDUCATION BACKGROUND</h2>
+    <div class="edu-list">
+      <div class="edu-item">
+        <p>2014 - 2015</p>
+        <h3>TK Al Muttaqin</h3>
+        <div class="edu-preview"><img src="assets/profile1.jpeg"></div>
+      </div>
+      <div class="edu-item">
+        <p>2015 - 2021</p>
+        <h3>SD Muhammadiyah 1</h3>
+        <div class="edu-preview"><img src="assets/profile2.jpeg"></div>
+      </div>
+      <div class="edu-item">
+        <p>2021 - 2024</p>
+        <h3>SMP Negeri 4</h3>
+        <div class="edu-preview"><img src="assets/profile3.jpeg"></div>
+      </div>
+      <div class="edu-item">
+        <p>2024 - PRESENT</p>
+        <h3>SMK Semen Gresik</h3>
+        <div class="edu-preview"><img src="assets/profile4.jpeg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="reveal-slide">
+    <h2 style="font-size: 40px; color: #fff;">CONTACT PERSON</h2>
+    <div class="contact-icons">
+      <a href="https://wa.me/6287716389476" target="_blank"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+      <a href="https://instagram.com/mianng.jpg" target="_blank"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+      <a href="javascript:void(0)"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+      <a href="mailto:miannnnnne@gmail.com"><i class="far fa-envelope"></i><span>Email</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="copyright-label">
+  <i class="far fa-copyright"></i> <span>Copyright Aiman <br> <small style="font-size: 8px;">all rights reserved</small></span>
+</div>
+
+<script>
+  // Script IntersectionObserver untuk mentrigger animasi berulang
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      } else {
+        // Baris ini membuat animasi terhapus saat keluar layar, 
+        // sehingga akan aktif lagi saat kamu scroll balik.
+        entry.target.classList.remove('active');
+      }
+    });
+  }, { 
+    threshold: 0.1,
+    rootMargin: "0px 0px -10% 0px"
+  });
+
+  document.querySelectorAll('section').forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
