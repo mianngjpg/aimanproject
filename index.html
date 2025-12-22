@@ -76,6 +76,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
+  transition: 0.4s;
 }
 nav ul { display: flex; list-style: none; gap: 40px; }
 nav a { color: #888; text-decoration: none; font-size: 18px; font-weight: 500; transition: 0.3s; }
@@ -95,19 +96,19 @@ section {
 .reveal-slide {
   opacity: 0;
   transform: translateX(80px);
-  transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1), transform 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+  transition: opacity 2.5s cubic-bezier(0.2, 1, 0.3, 1), transform 2.5s cubic-bezier(0.2, 1, 0.3, 1);
 }
 .reveal-up {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  transition: opacity 2.5s ease, transform 2.5s ease;
 }
 .active .reveal-slide, .active .reveal-up {
   opacity: 1;
   transform: translate(0);
 }
 
-/* ===== HOME (ANIMASI BERULANG) ===== */
+/* ===== HOME (ANIMASI LAMA & BERULANG) ===== */
 #home {
   flex-direction: column;
   justify-content: center;
@@ -120,8 +121,8 @@ section {
   color: #ccc;
   line-height: 1;
   opacity: 0;
-  transform: scale(0.6);
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  transform: scale(0.7);
+  transition: opacity 2.5s ease, transform 2.5s ease;
 }
 .hero-sub {
   font-size: 14px;
@@ -130,18 +131,17 @@ section {
   color: #666;
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1.5s ease 0.3s, transform 1.5s ease 0.3s;
+  transform: translateY(30px);
+  transition: opacity 2s ease 0.8s, transform 2s ease 0.8s;
 }
 .tech {
   margin-top: 30px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease 0.6s, transform 1.5s ease 0.6s;
+  transform: translateY(30px);
+  transition: opacity 2s ease 1.5s, transform 2.5s ease 1.5s;
 }
 .tech img { width: 250px; filter: grayscale(1) brightness(0.8); }
 
-/* State Aktif untuk Home */
 #home.active .hero-title { opacity: 1; transform: scale(1); }
 #home.active .hero-sub, #home.active .tech { opacity: 1; transform: translateY(0); }
 
@@ -150,9 +150,9 @@ section {
 .profile-wrapper { width: 100%; height: 100vh; display: flex; justify-content: space-between; align-items: center; }
 .profile-text { width: 45%; padding-left: 80px; }
 .profile-text h2 { font-size: 48px; color: #fff; margin-bottom: 5px; }
-.profile-text .email { display: block; font-size: 22px; margin-bottom: 60px; color: #ccc; font-family: 'Inter', sans-serif; }
+.profile-text .email { display: block; font-size: 22px; margin-bottom: 30px; color: #ccc; font-family: 'Inter', sans-serif; }
 .profile-text p { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; color: #aaa; text-align: justify; }
-.location-footer { margin-top: 100px; font-size: 12px; text-align: center; width: 100%; color: #666; letter-spacing: 2px; }
+.location-footer { margin-top: 50px; font-size: 12px; text-align: center; width: 100%; color: #666; letter-spacing: 2px; }
 .profile-image { width: 50%; height: 100%; display: flex; justify-content: flex-end; align-items: flex-end; }
 .profile-image img { height: 90vh; object-fit: cover; filter: grayscale(100%) contrast(1.1); }
 
@@ -178,6 +178,33 @@ section {
 .contact-icons span { font-size: 11px; color: #444; margin-top: 10px; }
 
 .copyright-label { position: fixed; right: 40px; bottom: 40px; display: flex; align-items: center; gap: 10px; font-size: 11px; color: #555; text-transform: uppercase; }
+
+/* ===== RESPONSIVE UNTUK HP ===== */
+@media (max-width: 768px) {
+  nav { padding: 20px; flex-direction: column; gap: 10px; }
+  nav ul { gap: 15px; }
+  nav a { font-size: 13px; }
+  .logo-lfc img { width: 35px; }
+
+  section { padding: 0 20px; }
+  .hero-title { font-size: 55px; }
+
+  .profile-wrapper { flex-direction: column; height: auto; padding-top: 100px; padding-bottom: 50px; }
+  .profile-text { width: 100%; padding-left: 0; text-align: center; }
+  .profile-text h2 { font-size: 32px; }
+  .profile-text p { text-align: center; font-size: 14px; }
+  
+  .profile-image { width: 100%; justify-content: center; margin-top: 20px; }
+  .profile-image img { height: 45vh; }
+
+  .edu-preview { display: none; }
+  .edu-item h3 { font-size: 22px; }
+
+  .contact-icons { gap: 30px; flex-wrap: wrap; justify-content: center; }
+  .contact-icons a { font-size: 45px; }
+  
+  .decor-arrows, .copyright-label { display: none; }
+}
 </style>
 </head>
 
@@ -193,7 +220,7 @@ section {
   <ul>
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#education">Education Background</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="logo-lfc">
@@ -215,7 +242,7 @@ section {
       <h2>ABOUT ME</h2>
       <span class="email">miannnnnne@gmail.com</span>
       <p>
-       Aiman Muhammad Alkhatib (Aiman), Saya berasal dari kota Gresik Jawa Timur, 
+        Aiman Muhammad Alkhatib (Aiman), Saya berasal dari kota Gresik Jawa Timur, 
         saya anak kedua dari 2 bersaudara, saya dari kecil sangat suka dengan hal yang 
         berbau dengan teknologi, saya sangat suka bermain sepak bola, futsal, basket 
         dan olahraga lainnya. Selain itu saya sangat suka bermain game PES, Minecraft, 
@@ -233,7 +260,7 @@ section {
 
 <section id="education">
   <div class="reveal-up">
-    <h2 style="font-size: 40px; color: #fff; margin-bottom: 50px;">EDUCATION BACKGROUND</h2>
+    <h2 style="font-size: 32px; color: #fff; margin-bottom: 40px;">EDUCATION BACKGROUND</h2>
     <div class="edu-list">
       <div class="edu-item">
         <p>2014 - 2015</p>
@@ -261,7 +288,7 @@ section {
 
 <section id="contact">
   <div class="reveal-slide">
-    <h2 style="font-size: 40px; color: #fff;">CONTACT PERSON</h2>
+    <h2 style="font-size: 32px; color: #fff;">CONTACT PERSON</h2>
     <div class="contact-icons">
       <a href="https://wa.me/6287716389476" target="_blank"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
       <a href="https://instagram.com/mianng.jpg" target="_blank"><i class="fab fa-instagram"></i><span>Instagram</span></a>
@@ -276,14 +303,11 @@ section {
 </div>
 
 <script>
-  // Script IntersectionObserver untuk mentrigger animasi berulang
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
       } else {
-        // Baris ini membuat animasi terhapus saat keluar layar, 
-        // sehingga akan aktif lagi saat kamu scroll balik.
         entry.target.classList.remove('active');
       }
     });
